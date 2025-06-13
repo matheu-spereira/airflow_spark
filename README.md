@@ -1,5 +1,5 @@
 # airflow_spark
-Este projeto configura um ambiente de orquestração e processamento de dados utilizando **Apache Airflow**, **Apache Spark**, **MinIO**, com suporte a múltiplos workers e execução distribuída de tarefas.
+Este projeto configura um ambiente de orquestração e processamento de dados utilizando **Apache Airflow**, **Apache Spark** e **MinIO**, com suporte a múltiplos workers e execução distribuída de tarefas.
 
  Este ambiente é destinado apenas para uso local e fins de desenvolvimento.
 
