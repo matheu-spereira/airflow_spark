@@ -157,6 +157,23 @@ services:
     networks:
       - sparkpg_network
 
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+        echo 'Aguardando o MinIO...';
+        sleep 10;
+        mc alias set myminio http://minio:9000 ${MINIO_ROOT_USER} ${MINIO_ROOT_PASSWORD} &&
+        mc mb -p myminio/bronze &&
+        mc mb -p myminio/silver &&
+        mc mb -p myminio/gold &&
+        echo 'Buckets criados com sucesso!'
+      "
+    networks:
+      - sparkpg_network
+
   postgres:
     image: postgres:13
     environment:
