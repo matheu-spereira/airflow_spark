@@ -15,6 +15,5 @@ RUN curl https://dlcdn.apache.org/spark/spark-3.5.6/spark-3.5.6-bin-hadoop3.tgz 
 ENV SPARK_MASTER_PORT="7077"
 # Name of master container and also counts as hostname
 ENV SPARK_MASTER_HOST="spark-master"
-
 COPY spark-defaults.conf "${SPARK_HOME}/conf/spark-defaults.conf"
 ENTRYPOINT ["/bin/bash"]

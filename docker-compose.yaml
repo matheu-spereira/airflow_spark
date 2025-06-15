@@ -78,7 +78,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     - spark-events:/opt/spark/events # adicionado para ler spark events
-    - ./scripts:/opt/airflow/scripts # adicionado para ler os scripts spark
+    - ./scripts:/opt/airflow/scripts # adicionado para ler os scripts python
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -91,6 +91,7 @@ volumes:
   postgres-db-volume:
   spark-events: # adicionado
   minio-data: # adicionado para o MinIO
+  pgduckdb_data: # adicionado para o pgDuckDB
 
 networks:
   sparkpg_network:
@@ -171,6 +172,21 @@ services:
         mc mb -p myminio/gold &&
         echo 'Buckets criados com sucesso!'
       "
+    networks:
+      - sparkpg_network
+
+  db:
+    image: pgduckdb/pgduckdb:16-main
+    ports:
+      - 5555:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgduckdb_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
+    restart: always
     networks:
       - sparkpg_network
 
