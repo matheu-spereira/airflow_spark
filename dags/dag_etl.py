@@ -20,10 +20,10 @@ postgres_db = f"jdbc:postgresql://{postgres_host}:{postgres_port}/{postgres_sche
 
 
 # Caminhos dos JARs
-postgres_driver_jar = "/opt/spark/jars/postgresql-42.6.0.jar"
-hadoop_driver_jar = "/opt/spark/jars/hadoop-aws-3.3.4.jar"
-aws_driver_jar = "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar"
-delta_driver_jar = "/opt/spark/jars/delta-spark_2.12-3.2.0.jar"
+#postgres_driver_jar = "/opt/spark/jars/postgresql-42.6.0.jar"
+#hadoop_driver_jar = "/opt/spark/jars/hadoop-aws-3.3.4.jar"
+#aws_driver_jar = "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar"
+#delta_driver_jar = "/opt/spark/jars/delta-spark_2.12-3.2.0.jar"
 
 # Configurações padrão da DAG
 default_args = {
@@ -50,12 +50,12 @@ common_spark_conf = {
 }
 
 # Lista de JARs
-common_jars = ",".join([
-    postgres_driver_jar,
-    hadoop_driver_jar,
-    aws_driver_jar,
-    delta_driver_jar
-])
+#common_jars = ",".join([
+#    postgres_driver_jar,
+#    hadoop_driver_jar,
+#    aws_driver_jar,
+#    delta_driver_jar
+#])
 
 
 with DAG(
@@ -73,7 +73,7 @@ with DAG(
         conn_id='spark_standalone',
         application_args=[],
         conf=common_spark_conf,
-        jars=common_jars,
+        #jars=common_jars,
         verbose=True,
         deploy_mode='client',
         total_executor_cores=4,
@@ -87,7 +87,7 @@ with DAG(
         conn_id='spark_standalone',
         application_args=[],
         conf=common_spark_conf,
-        jars=common_jars,
+        #jars=common_jars,
         verbose=True,
         deploy_mode='client',
         total_executor_cores=4,
@@ -101,7 +101,7 @@ with DAG(
         conn_id='spark_standalone',
         conf=common_spark_conf,
         application_args=[postgres_db, postgres_user, postgres_pwd],
-        jars=common_jars,
+        #jars=common_jars,
         verbose=True,
         deploy_mode='client',
         total_executor_cores=4,
