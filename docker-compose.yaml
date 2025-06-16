@@ -117,7 +117,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.spark
-    #command:  bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_SSL_ENABLED=no
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=4
     command: >
       -c "chmod -R 777 /opt/spark/events && bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077"
     networks:

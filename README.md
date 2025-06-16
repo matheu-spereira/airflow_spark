@@ -40,5 +40,15 @@ docker compose up -d
     "s3a.endpoint": "http://minio:9000" <br>
   }
 
+### Postgres (PG_DUCKDB):
+- **Connection ID:** postgres_conn
+- **Connection Type:** postgres
+- **Host:** {pg_host}
+- **login:** {pg_user}
+- **password:** {pg_pwd}
+- **port:** {pg_port}
+- **database:** {pg_database}
+
+
 # Dag de exemplo (spark_pi_cluster_job)
  ![alt text](./assets/dag.png)
