@@ -48,7 +48,3 @@ docker compose up -d
 - **password:** {pg_pwd}
 - **port:** {pg_port}
 - **database:** {pg_database}
-
-
-# Dag de exemplo (spark_pi_cluster_job)
- ![alt text](./assets/dag.png)
